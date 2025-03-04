@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorWASMPlusEFBlogging", "BlazorWASMPlusEFBlogging\BlazorWASMPlusEFBlogging.csproj", "{1B6803C0-7E1C-47E5-833C-85DE13225D1F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorServerPlusEFBlogging", "BlazorServerPlusEFBlogging\BlazorServerPlusEFBlogging.csproj", "{1B6803C0-7E1C-47E5-833C-85DE13225D1F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinimalApiWithAuth", "MinimalApiWithAuth\MinimalApiWithAuth.csproj", "{49FBEACD-06DB-4E7D-8A9A-6C84016D264F}"
 EndProject

@@ -19,7 +19,7 @@ namespace BlazorApp3.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.2");
 
-            modelBuilder.Entity("BlazorWASMPlusEFBlogging.Persistence.Post", b =>
+            modelBuilder.Entity("BlazorServerPlusEFBlogging.Persistence.Post", b =>
                 {
                     b.Property<int>("PostId")
                         .ValueGeneratedOnAdd()
