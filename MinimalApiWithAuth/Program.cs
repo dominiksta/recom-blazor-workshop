@@ -1,5 +1,7 @@
 using System.Net;
 
+const string clientPort = "5157";
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors();
 // builder.Services.AddSession(options =>
 // {
 //     options.IdleTimeout = TimeSpan.FromSeconds(10);
@@ -25,14 +28,21 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCors(options =>
+{
+    options.WithOrigins("http://localhost:" + clientPort)
+        .WithMethods("GET", "POST")
+        .AllowAnyHeader();
+});
+
 // app.UseSession();
 
 var sessions = new Dictionary<string, Session>();
 const string sessionCookie = "eu.recom.session";
 
-app.MapGet("/login", (string username, string password, HttpContext ctx) =>
+app.MapPost("/login", (LoginRequestDTO body, HttpContext ctx) =>
     {
-        if (username == "admin" && password == "catmin")
+        if (body.Username == "admin" && body.Password == "catmin")
         {
             var sessionId = Guid.NewGuid().ToString();
             if (!sessions.ContainsKey(sessionId))
@@ -80,6 +90,12 @@ app.MapGet("/logout", (HttpContext ctx) =>
 });
 
 app.Run();
+
+struct LoginRequestDTO
+{
+    public string Username { get; set; }
+    public string Password { get; set; }
+}
 
 class Session
 {
