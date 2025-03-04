@@ -1,0 +1,37 @@
+﻿@page "/DisplayBlog"
+@using BlazorApp3.Persistence
+@rendermode InteractiveServer
+
+<h3>DisplayBlog</h3>
+
+<style>
+    .article {
+        margin-bottom: 1em;
+    }
+</style>
+
+@foreach (var post in _posts)
+{
+    <Card class="article">
+        <CardBody>
+            <CardTitle>@post.Title</CardTitle>
+            <CardText>@post.Content</CardText>
+            <Button Color="ButtonColor.Danger" @onclick="() => OnDeletePost(@post)">Delete</Button>
+        </CardBody>
+    </Card>
+}
+
+
+@code {
+    private List<Post> _posts = new();
+    
+    protected override async Task OnInitializedAsync()
+    {
+        _posts = await GetPosts();
+    }
+
+    private async Task OnDeletePost(Post post)
+    {
+        await DeletePost(post);
+    }
+}

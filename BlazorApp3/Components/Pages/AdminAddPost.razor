@@ -1,0 +1,58 @@
+﻿@page "/Admin"
+@using System.ComponentModel.DataAnnotations
+@inject ILogger<AdminAddPost> Logger
+@inject NavigationManager NavigationManager
+@rendermode InteractiveServer
+
+<h3>Admin: Add Post</h3>
+<style>
+    #button-submit {
+        margin-top: 1em;
+    }
+</style>
+
+<EditForm Model="Model" OnValidSubmit="OnValidSubmit" FormName="admin-add-post" Enhance>
+    <div>
+        <label for="input-title">Post Title</label>
+        <TextInput Id="input-title" @bind-Value="Model.PostName"/>
+    </div>
+    <div>
+        <label for="input-text">Post Text</label>
+        <TextAreaInput Id="input-text" @bind-Value="Model.PostText"/>
+    </div>
+    <Button id="button-submit" Color="ButtonColor.Primary" Type="ButtonType.Submit">Add Post</Button>
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+</EditForm>
+
+@if (_submitting)
+{
+    <Callout>
+        submitting...
+    </Callout>
+}
+
+@code {
+    private class PostFormModel
+    {
+        [Required]
+        [StringLength(maximumLength: 200, MinimumLength = 5, ErrorMessage = "Name length")]
+        public string PostName { get; set; } = "";
+        public string PostText { get; set; } = "";
+    }
+
+    [SupplyParameterFromForm] private PostFormModel Model { get; set; } = new PostFormModel();
+    // protected override void OnInitialized() => Model ??= new();
+
+    private bool _submitting = false;
+    
+    private async Task OnValidSubmit()
+    {
+        Logger.LogInformation("Adding Post");
+        _submitting = true;
+        await Task.Delay(500);
+        await AddPost(Model.PostName, Model.PostText);
+        _submitting = false;
+        NavigationManager.NavigateTo("displayblog");
+    }
+}
