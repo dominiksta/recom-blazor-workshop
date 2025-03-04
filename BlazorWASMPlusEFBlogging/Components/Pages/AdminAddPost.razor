@@ -53,6 +53,10 @@
         await Task.Delay(500);
         await AddPost(Model.PostName, Model.PostText);
         _submitting = false;
-        NavigationManager.NavigateTo("displayblog");
+        var uri = NavigationManager.GetUriWithQueryParameters(new Dictionary<string, object?>()
+        {
+            { "search", "jaja" }
+        });
+        NavigationManager.NavigateTo("/displayblog" + uri);
     }
 }

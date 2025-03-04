@@ -1,0 +1,8 @@
+﻿main {
+    display: flex;
+}
+
+.article {
+    margin: 1em;
+    max-height: 20em;
+}

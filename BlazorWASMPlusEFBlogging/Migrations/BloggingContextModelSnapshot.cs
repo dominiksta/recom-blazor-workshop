@@ -2,7 +2,6 @@
 using BlazorApp3.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,16 +9,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlazorApp3.Migrations
 {
     [DbContext(typeof(BloggingContext))]
-    [Migration("20250303134614_InitialCreate")]
-    partial class InitialCreate
+    partial class BloggingContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.2");
 
-            modelBuilder.Entity("BlazorApp3.Persistence.Post", b =>
+            modelBuilder.Entity("BlazorWASMPlusEFBlogging.Persistence.Post", b =>
                 {
                     b.Property<int>("PostId")
                         .ValueGeneratedOnAdd()
